@@ -1,0 +1,33 @@
+html {
+    overflow: auto !important;
+}
+
+#app {
+    margin: 0 auto;
+    font-weight: normal;
+}
+
+body {
+    /* STYLE */
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    transition: color 0.5s, background-color 0.5s;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.preventSelect {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.preventWordBreak {
+    white-space: nowrap;
+}
+
+a {
+    text-decoration: inherit;
+    color: inherit;
+    display: flex;
+}
