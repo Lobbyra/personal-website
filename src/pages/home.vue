@@ -172,6 +172,14 @@ export default {
 
 <style scoped>
 
+@media only screen and (min-width: 600px) {
+    #mainHome {
+        display: flex;
+        align-items: center;
+        height: calc(100vh - 150px);
+    }
+}
+
 #deskContent {
     margin-top: 75px;
     padding-left: 12px;

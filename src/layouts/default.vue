@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="defaultLayoutMain">
     <!-- <v-app-bar
     app
     v-if="isMobileComp"
@@ -56,6 +56,11 @@ export default {
 </script>
 
 <style scoped>
+
+#defaultLayoutMain {
+    width: 100%;
+    height: 100%;
+}
 
 #desktopAppBar {
     /* LAYOUT */

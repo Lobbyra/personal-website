@@ -1,6 +1,6 @@
 <template>
 <v-app>
-    <main>
+    <main class="maxSize">
         <component :is="layout || 'div'">
             <router-view />
         </component>

@@ -31,3 +31,8 @@ a {
     color: inherit;
     display: flex;
 }
+
+.maxSize {
+    width: 100%;
+    height: 100%;
+}
