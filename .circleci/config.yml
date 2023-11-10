@@ -15,7 +15,7 @@ jobs:
           command: "apt update && apt install make tree"
       - run:
           name: "debug tree src"
-          command: "tree src"
+          command: "ls -lah"
       - run:
           name: "build"
           command: "make build"
