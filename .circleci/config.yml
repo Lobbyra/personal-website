@@ -11,23 +11,23 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          name: "Restore yarn cache i exists"
+          name: "Restore bun cache if exists"
           keys:
-            - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+            - bun-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "bun.lock" }}
       - run:
-          name: "bun install"
-          command: "bun install"
+          name: "install make"
+          command: "apt update && apt install make"
+      - run:
+          name: "install node modules"
+          command: "make installDep"
       - save_cache:
-          name: "Save yarn cache"
+          name: "Save bun cache"
           paths:
             - node_modules
-          key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+          key: bun-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "bun.lock" }}
       - run:
-          name: "bun test"
-          command: "bun test"
-      - run:
-          name: "bun build"
-          command: "bun run build"
+          name: "build"
+          command: "make build"
       - persist_to_workspace:
           root: .
           paths:

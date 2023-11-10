@@ -1,11 +1,15 @@
 installDep :
-	yarn
+	bun install
+
+test :
+	bun test
 
 dev :
-	yarn run dev
+	bun dev
 
-build :
-	yarn run build
+build : installDep test
+	bun run type-check
+	bun run build-only
 
 clean :
 	rm -rf ./dist/
