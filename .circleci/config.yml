@@ -5,22 +5,56 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
+  ci:
     docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
+      - image: oven/bun:latest
     steps:
       - checkout
+      - restore_cache:
+          name: "Restore yarn cache i exists"
+          keys:
+            - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: "bun install"
+          command: "bun install"
+      - save_cache:
+          name: "Save yarn cache"
+          paths:
+            - node_modules
+          key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: "bun test"
+          command: "bun test"
+      - run:
+          name: "bun build"
+          command: "bun build"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+  cd:
+    docker:
+      - image: cibuilds/aws:latest
+    steps:
+    - attach_workspace:
+          at: .
+    - run:
+        name: Send dist to s3
+        command: aws s3 sync ./dist s3://$AWS_BUCKET_NAME/ --delete
+    - run:
+        name: Invalidate Cloudfront cache
+        command: aws cloudfront create-invalidation --distribution-id $AWS_DISTRIB_ID --paths "/*"
 
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello
+      - ci
+  dev:
+    jobs:
+      - ci
+  main:
+    jobs:
+      - ci
+      - cd:
+          requires:
+                - ci
