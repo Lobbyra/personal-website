@@ -10,21 +10,12 @@ jobs:
       - image: oven/bun:latest
     steps:
       - checkout
-      - restore_cache:
-          name: "Restore bun cache if exists"
-          keys:
-            - bun-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "bun.lock" }}
       - run:
           name: "install make"
           command: "apt update && apt install make"
       - run:
           name: "install node modules"
           command: "make installDep"
-      - save_cache:
-          name: "Save bun cache"
-          paths:
-            - node_modules
-          key: bun-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "bun.lock" }}
       - run:
           name: "build"
           command: "make build"
