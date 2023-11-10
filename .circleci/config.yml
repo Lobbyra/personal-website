@@ -12,10 +12,10 @@ jobs:
       - checkout
       - run:
           name: "install make"
-          command: "apt update && apt install make"
+          command: "apt update && apt install make tree"
       - run:
-          name: "install node modules"
-          command: "make installDep"
+          name: "debug tree src"
+          command: "tree src"
       - run:
           name: "build"
           command: "make build"
