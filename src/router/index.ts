@@ -1,5 +1,5 @@
-import * as FHFPage from "@/pages/404.vue";
-import * as HomePage from "@/pages/home.vue";
+import FHFPage from "@/pages/404.vue";
+import HomePage from "@/pages/home.vue";
 import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router";
 import localePresenceProtection from "./localePresenceProtection";
 
@@ -26,9 +26,9 @@ const routes: RouteRecordRaw[] = [
                 path: "/:locale/",
                 name: "index",
                 meta: {
-                    layout: "defaultLayout",
+                    layout: "DefaultLayout",
                 },
-                component: HomePage.default,
+                component: HomePage,
             },
         ]
     },
@@ -37,7 +37,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
             layout: "DefaultLayout"
         },
-        component: FHFPage.default,
+        component: FHFPage,
     }
 ];
 
