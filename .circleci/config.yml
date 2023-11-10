@@ -47,12 +47,21 @@ jobs:
 
 workflows:
   say-hello-workflow:
+    when:
+      and:
+        - equal: [ say-hello-workflow, << pipeline.git.branch >>]
     jobs:
       - ci
   dev:
+    when:
+      and:
+        - equal: [ dev, << pipeline.git.branch >>]
     jobs:
       - ci
   main:
+    when:
+      and:
+        - equal: [ main, << pipeline.git.branch >>]
     jobs:
       - ci
       - cd:
