@@ -19,6 +19,13 @@
                     mdi-github
                 </v-icon>
             </a>
+            <a
+            target="_blank"
+            href="https://app.hackthebox.com/users/527776">
+                <img
+                alt="htb personal icon"
+                src="@/assets/htb.svg">
+            </a>
         </div>
     </div>
     <v-navigation-drawer
@@ -76,11 +83,12 @@ export default {
 }
 
 #desktopAppBarContent {
-    max-width: 1100px;
+    gap: 12px;
     width: 100%;
+    display: flex;
+    max-width: 1100px;
     margin-right: 12px;
     margin-left: 12px;
-    display: flex;
 }
 
 </style>
