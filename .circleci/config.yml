@@ -27,7 +27,7 @@ jobs:
           command: "bun test"
       - run:
           name: "bun build"
-          command: "bun build"
+          command: "bun run build"
       - persist_to_workspace:
           root: .
           paths:
