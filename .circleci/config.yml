@@ -49,7 +49,7 @@ workflows:
   say-hello-workflow:
     when:
       and:
-        - equal: [ say-hello-workflow, << pipeline.git.branch >>]
+        - equal: [ circleci-project-setup, << pipeline.git.branch >>]
     jobs:
       - ci
   dev:
