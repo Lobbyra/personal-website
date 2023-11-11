@@ -132,7 +132,6 @@
                         </div>
                     </a>
                 </MyBtn>
-                [cicd test]
             </div>
         </div>
         <div id="introIllu">
