@@ -1,6 +1,6 @@
 # Personnal website
 
-This is my personnal website available at jecaudal.fr.
+This is my personnal website available at [jecaudal.fr](https://jecaudal.fr/).
 
 ## Summary
 
