@@ -12,6 +12,9 @@
   },
   "dependencies": {
     "@mdi/font": "^7.2.96",
+    "@prismicio/client": "^7.3.1",
+    "@prismicio/vue": "^4.1.0",
+    "axios": "^1.6.1",
     "vue": "^3.2.47",
     "vue-i18n": "9",
     "vue-router": "^4.1.6",
