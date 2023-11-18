@@ -12,20 +12,20 @@
         <div id="desktopAppBarContent">
             <a
             target="_blank"
+            class="d-flex align-center"
             href="https://github.com/Lobbyra">
                 <v-icon
                 size="large"
-                color="black">
+                :color="$vuetify.theme.current.colors.onBackground">
                     mdi-github
                 </v-icon>
             </a>
-            <a
-            target="_blank"
-            href="https://app.hackthebox.com/users/527776">
-                <img
-                alt="htb personal icon"
-                src="@/assets/htb.svg">
-            </a>
+            <v-spacer/>
+            <v-btn
+            fab
+            @click="changeTheme()"
+            elevation="0"
+            :icon="isLightThemeComp ? 'md:light_mode' : 'md:dark_mode'"/>
         </div>
     </div>
     <v-navigation-drawer
@@ -36,7 +36,9 @@
     v-model="isDrawerShown">
         coucou
     </v-navigation-drawer>
-    <slot/>
+    <div id="slot">
+        <slot/>
+    </div>
 </div>
 </template>
 
@@ -54,7 +56,18 @@ export default {
     },
     mounted() {
     },
+    methods: {
+        changeTheme() {
+            this.$emit(
+                "changeTheme",
+                this.isLightThemeComp ? "dark" : "light"
+            )
+        }
+    },
     computed: {
+        isLightThemeComp() {
+            return (this.$vuetify.theme.current.dark == false);
+        },
         isMobileComp(): boolean {
             return (this.$vuetify.display.width <= 600);
         }
@@ -78,6 +91,9 @@ export default {
     padding-right: 0px;
     align-items: center;
     justify-content: center;
+    position: fixed;
+    overflow: scroll;
+    z-index: 100;
     /* STYLE */
     background-color: rgba(var(--v-theme-background));
 }
@@ -87,8 +103,12 @@ export default {
     width: 100%;
     display: flex;
     max-width: 1100px;
-    margin-right: 12px;
     margin-left: 12px;
+    margin-right: 12px;
+}
+
+#slot {
+    padding-top: 64px;
 }
 
 </style>

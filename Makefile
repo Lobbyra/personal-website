@@ -4,7 +4,7 @@ installDep :
 test :
 	bun test
 
-dev :
+dev : installDep
 	bun dev
 
 build : installDep test

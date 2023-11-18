@@ -1,7 +1,7 @@
 <template>
 <v-app>
     <main class="maxSize">
-        <component :is="layout || 'div'">
+        <component @changeTheme="toggleTheme($event)" :is="layout || 'div'">
             <router-view />
         </component>
     </main>
@@ -13,6 +13,7 @@
 import layouts from "@/layouts/layouts";
 import router from "@/router/index";
 import { provide, shallowRef } from 'vue';
+import { useTheme } from 'vuetify';
 
 const layout = shallowRef("div");
 
@@ -21,6 +22,13 @@ router.afterEach(
         layout.value = (layouts as any)[to.meta.layout] || "div";
     }
 );
+
+
+const theme = useTheme()
+
+function toggleTheme (newTheme: string) {
+  theme.global.name.value = newTheme;
+}
 
 provide("app:layout", layout);
 

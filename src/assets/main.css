@@ -7,6 +7,14 @@ html {
     font-weight: normal;
 }
 
+* {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+html {
+    overflow: auto !important;
+}
+
 body {
     /* STYLE */
     text-rendering: optimizeLegibility;
