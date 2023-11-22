@@ -1,15 +1,14 @@
 <template>
 <div id="postCard">
     <div
-    v-if="short == false"
-    id="cardTitleWrapper">
-        <div class="cardTitleTitleWrapper">
+    id="cardHeader"
+    v-if="short == false">
+        <div id="cardDataWrapper">
             <div id="cardTitle">
-                {{ doc?.data.title[0].text || ""}}
+                {{ doc?.data.title[0].text || "A title must be here" }}
             </div>
             <div
-            class="tagsList"
-            id="shortVersionTags"
+            id="tagList"
             v-if="doc?.tags.length > 0">
                 <v-chip
                 v-for="i in doc?.tags"
@@ -33,14 +32,11 @@
                 {{ doc?.data.title[0].text || "A title must be here"}}
             </span>
         </div>
-        <div
-        class="tagsList"
-        id="shortVersionTags">
+        <div id="tagList">
             <v-chip
             size="small"
-            variant="outlined"
-            :color="_selectColor(i, chipsPalette)"
-            v-for="i in doc?.tags">
+            v-for="i in doc?.tags"
+            :color="_selectColor(i, chipsPalette)">
                 #{{ i }}
             </v-chip>
         </div>
@@ -62,6 +58,7 @@
             <div class="d-flex align-self-end">
                 <v-btn
                 elevation="0"
+                variant="outlined"
                 @click="gotoPost(doc!.uid!)"
                 :color="$vuetify.theme.current.dark == false ? 'black' : 'white'">
                     {{ $t("gotoPost") }}
@@ -79,11 +76,12 @@
         :src="doc?.data.illustration.url">
         <div id="introTxt">
             <span>
-                {{ getIntroTxtComp || "" }}
+                {{ doc?.data.introtxt[0].text || "" }}
             </span>
         </div>
         <v-btn
         color="black"
+        variant="outlined"
         @click="gotoPost(doc!.uid!)">
             {{ $t("read") }}
         </v-btn>
@@ -157,55 +155,47 @@ export default {
 #postCard {
     /* LAYOUT */
     gap: 12px;
+    min-width: 0;
     display: flex;
     padding: 18px;
-    max-height: 300px;
-    position: relative;
-    transition: 0.4s;
+    transition: 0.4s; 
     flex-direction: column;
     /* STYLE */
-    border: 3px solid #00000000;
     border-radius: 7px;
+    border: 3px solid #00000000;
     background-color: #c4c4c430;
 }
 
 #postCard:hover {
+    border: 3px solid #00000020;
     transform: scale(1.005) translateY(-5px);
     box-shadow: 8px 8px 20px rgba(33,33,33,.12); 
-    border: 3px solid #00000020;
 }
 
+#cardHeader {
+    min-width: 0;
+    display: flex;
+}
 
 #cardTitle {
-    font-size: 20px;
-    min-width: 0;
-    max-width: 820px;
-    text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-
-#cardTitleWrapper {
-    gap: 8px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-#cardTitleTitleWrapper {
+#cardDataWrapper {
     gap: 12px;
+    min-width: 0;
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-
-#shortCardTitleWrapper {
-    display: flex;
-    gap: 10px;
     flex-direction: column;
 }
+
+#shortCardTitleWrapper {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
 
 #cardIllu {
     /* LAYOUT */
@@ -214,27 +204,27 @@ export default {
     flex-shrink: 0;
     transition: 0.4s;
     /* STYLE */
-    border-radius: 5px;
     object-fit: cover;
+    border-radius: 5px;
 }
 
 #cardIllu:hover {
-    transform: scale(1.5);
     border-radius: 10px;
+    transform: scale(1.5);
     box-shadow: 0 0 17px rgba(33,33,33,.5);
 }
 
 #shortCardContent {
+    gap: 18px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
 }
 
-.tagsList {
+#tagList {
     gap: 8px;
+    min-width: 0;
     display: flex;
-    overflow: hidden;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
 #cardContent {
@@ -246,18 +236,18 @@ export default {
 }
 
 #cardText {
+    gap: 12px;
     width: 100%;
     display: flex;
     max-height: 170px;
-    gap: 12px;
     flex-direction: column;
     justify-content: space-between;
 }
 
 #introTxt {
-    text-overflow: ellipsis;
     overflow: hidden;
     display: -webkit-box;
+    text-overflow: ellipsis;
     -webkit-line-clamp: 5; /* Set the number of lines before the ellipsis */
     -webkit-box-orient: vertical;
 }

@@ -86,14 +86,13 @@ export default {
     /* LAYOUT */
     width: 100%;
     height: 64px;
+    z-index: 100;
     display: flex;
+    position: fixed;
     padding-left: 0px;
     padding-right: 0px;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    overflow: scroll;
-    z-index: 100;
     /* STYLE */
     background-color: rgba(var(--v-theme-background));
 }

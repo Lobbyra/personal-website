@@ -107,10 +107,10 @@
                     target="_blank"
                     class="btnContent"
                     href="https://www.linkedin.com/feed/">
-                        <img
-                        alt="vue icon"
-                        class="chipIcon"
-                        src="@/assets/linkedinIcon.svg">
+                        <v-icon
+                        :color="$vuetify.theme.current.dark ? 'white' : 'black'">
+                            mdi-linkedin
+                        </v-icon>
                         <span class="preventSelect preventWordBreak">
                             ME CONTACTER
                         </span>
@@ -122,10 +122,10 @@
                     class="btnContent"
                     href="/fr/cv.pdf">
                         <div class="btnContent">
-                            <img
-                            alt="vue icon"
-                            class="chipIcon"
-                            src="@/assets/docIcon.svg">
+                            <v-icon
+                            :color="$vuetify.theme.current.dark ? 'white' : 'black'">
+                                mdi-file-document-outline
+                            </v-icon>
                             <span class="preventSelect preventWordBreak">
                                 TÉLÉCHARGER MON CV
                             </span>
@@ -165,6 +165,13 @@ export default {
     computed: {
         isMobileComp(): boolean {
             return (this.$vuetify.display.width <= 600);
+        },
+        linkedinPathComp(): string {
+            if (this.$vuetify.theme.current.dark) {
+                return ("@/assets/linkedinIconwhite.svg")
+            } else {
+                return ("@/assets/linkedinIcon.svg")
+            }
         }
     }
 };

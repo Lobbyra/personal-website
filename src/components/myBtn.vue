@@ -20,18 +20,18 @@ export default {
 <style scoped>
 
 .mainBtn {
+    padding-top: 10px;
     border-radius: 5px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 10px;
     padding-bottom: 10px;
-    border: 2px #000000 solid;
     transition: all 0.2s;
+    border: 2px solid rgb(var(--v-theme-onBackground));
 }
 
 .mainBtn:hover {
     cursor: pointer;
-    background-color: #00000010;
+    background-color: rgba(var(--v-theme-background).10);
 }
 
 </style>

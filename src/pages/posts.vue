@@ -7,13 +7,16 @@ id="postsPageMain"
     @change="updateSearch($event)"
     :placeholder="$t('searchPostPlaceholder')"/>
     <div id="postCardsList">
-        <div class="postCard" v-for="doc in documentslist">
-            <PostCard :short="false" :doc="doc"/>
+        <div
+        class="postCard"
+        v-if="documentslist"
+        v-for="doc in documentslist">
+            <PostCard :short="isMobileComp" :doc="doc"/>
         </div>
     </div>
     <div
     id="emptyResults"
-    v-if="documentslist.length === 0">
+    v-if="documentslist && documentslist.length === 0">
         <div id="notFoundEmoji">
             <span id="notFoundEmojiSpan">
                 {{ notFoundEmojiComp }}
@@ -44,7 +47,7 @@ export default {
     data() {
         return {
             search: "" as string,
-            documentslist: new Array<PrismicDocument>(),
+            documentslist: null as null | Array<PrismicDocument>,
             pages: 1 as number,
             scrollUpdateLock: false as boolean,
         };
@@ -66,15 +69,25 @@ export default {
             })
         },
         async _fetchPosts() {
-            this.documentslist = this.documentslist.concat(
-                (
+            if (this.documentslist) {
+                this.documentslist = this.documentslist.concat(
+                    (
+                        await fetchPosts(
+                            this.$prismic,
+                            this.search,
+                            this.pages
+                        )
+                    ).results
+                )
+            } else {
+                this.documentslist = (
                     await fetchPosts(
                         this.$prismic,
                         this.search,
                         this.pages
                     )
                 ).results
-            )
+            }
         },
         async scrollUpdateData(event: any) {
             if (this.scrollUpdateLock == true) {
@@ -90,6 +103,9 @@ export default {
         }
     },
     computed: {
+        isMobileComp(): boolean {
+            return (this.$vuetify.display.width <= 600);
+        },
         notFoundEmojiComp(): string {
             this.documentslist;
             const emojis: Array<string> = [
@@ -113,17 +129,21 @@ export default {
 
 <style scoped>
 
+.postCard {
+    min-width: 0;
+    max-width: 100%;
+}
+
 #postsPageMain {
     gap: 24px;
-    height: calc(100vh - 64px);
-    padding: 24px;
     display: flex;
     margin: 0 auto;
-    overflow: auto;
     max-width: 1100px;
+    padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 24px;
     flex-direction: column;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
 }
 
 #postsPageMain::-webkit-scrollbar { 
@@ -131,22 +151,22 @@ export default {
 }
 
 #postCardsList {
+    gap: 24px;
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
     flex-direction: column;
 }
 
 #emptyResults {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    font-size: 20px;
     gap: 24px;
+    display: flex;
+    font-size: 20px;
+    margin-top: 50px;
+    text-align: center;
+    margin-bottom: 50px;
     align-content: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #notFoundEmoji {
