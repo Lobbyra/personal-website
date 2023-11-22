@@ -126,7 +126,7 @@
                     <a
                     target="_blank"
                     class="btnContent"
-                    href="/fr/cv.pdf">
+                    href="/cv.pdf">
                         <div class="btnContent">
                             <v-icon
                             :color="$vuetify.theme.current.dark ? 'white' : 'black'">
