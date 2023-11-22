@@ -114,26 +114,26 @@
             target="_blank"
             class="btnContent"
             href="https://www.linkedin.com/feed/">
-                <img
-                alt="vue icon"
-                class="chipIcon"
-                src="@/assets/linkedinIcon.svg">
-                <span class="preventSelect">
+                <v-icon
+                :color="$vuetify.theme.current.dark ? 'white' : 'black'">
+                    mdi-linkedin
+                </v-icon>
+                <span class="preventSelect preventWordBreak">
                     ME CONTACTER
                 </span>
             </a>
         </MyBtn>
         <MyBtn>
             <a
-            href="/cv.pdf"
             target="_blank"
-            class="btnContent">
+            class="btnContent"
+            href="/fr/cv.pdf">
                 <div class="btnContent">
-                    <img
-                    alt="vue icon"
-                    class="chipIcon"
-                    src="@/assets/docIcon.svg">
-                    <span class="preventSelect">
+                    <v-icon
+                    :color="$vuetify.theme.current.dark ? 'white' : 'black'">
+                        mdi-file-document-outline
+                    </v-icon>
+                    <span class="preventSelect preventWordBreak">
                         TÉLÉCHARGER MON CV
                     </span>
                 </div>
