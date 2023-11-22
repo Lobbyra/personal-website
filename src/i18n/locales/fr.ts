@@ -4,5 +4,7 @@ export const frMessages = {
     "read": "lire",
     "gotoPost": "lire l'article",
     "searchPostPlaceholder": "L'arduino qui alimente mon clavier",
-    "searchPostNotFound": "Je n'ai pas encore rédigé d'article sur ce que vous recherchez"
+    "searchPostNotFound": "Je n'ai pas encore rédigé d'article sur ce que vous recherchez",
+    "homeBlog": "blog",
+    "home": "accueil"
 }

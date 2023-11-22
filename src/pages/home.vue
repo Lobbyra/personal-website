@@ -84,7 +84,13 @@
                     <img
                     alt="vue icon"
                     class="chipIcon"
-                    src="@/assets/awsIcon.svg">
+                    src="@/assets/awsIcon.svg"
+                    v-if="$vuetify.theme.current.dark == false">
+                    <img
+                    alt="vue icon"
+                    class="chipIcon"
+                    src="@/assets/awsIconWhite.svg"
+                    v-if="$vuetify.theme.current.dark == true">
                 </MyChip>
                 <MyChip
                 icon
@@ -137,7 +143,14 @@
         <div id="introIllu">
             <img
             id="mainLogoSvg"
-            src="@/assets/homeMainIllu.svg" alt="main illu logo">
+            alt="main illu logo"
+            src="@/assets/homeMainIllu.svg"
+            v-if="$vuetify.theme.current.dark == false">
+            <img
+            id="mainLogoSvg"
+            alt="main illu logo"
+            src="@/assets/homeMainIlluWhite.svg"
+            v-if="$vuetify.theme.current.dark == true">
         </div>
     </div>
 </div>
