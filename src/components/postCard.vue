@@ -11,7 +11,8 @@
             id="tagList"
             v-if="doc?.tags.length > 0">
                 <v-chip
-                v-for="i in doc?.tags"
+                :key="index"
+                v-for="(i, index) in doc?.tags"
                 :color="_selectColor(i, chipsPalette)">
                     #{{ i }}
                 </v-chip>
@@ -35,9 +36,10 @@
         <div id="tagList">
             <v-chip
             size="small"
-            v-for="i in doc?.tags"
-            :color="_selectColor(i, chipsPalette)">
-                #{{ i }}
+            :key="index"
+            v-for="(item, index) in doc?.tags"
+            :color="_selectColor(item, chipsPalette)">
+                #{{ item }}
             </v-chip>
         </div>
     </div>
@@ -115,9 +117,6 @@ export default {
     },
     beforeMount() {
         this.chipsPalette = this.$vuetify.theme.current.dark ? TEXTONDARKPALETTE : TEXTONLIGHTPALETTE
-    },
-    mounted() {
-        console.log(this.doc);
     },
     methods: {
         _selectColor(inputString: string, palette: Array<string>) {

@@ -53,7 +53,6 @@ export default {
         };
     },
     async mounted() {
-        console.log();
         this._fetchPosts();
     },
     methods: {
