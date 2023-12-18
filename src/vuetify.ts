@@ -7,11 +7,21 @@ import { md } from 'vuetify/iconsets/md';
 import { mdi } from 'vuetify/iconsets/mdi';
 import 'vuetify/styles';
 
+let theme = "";
+switch (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    case true:
+        theme = "dark"
+        break;
+    case false:
+        theme = "light"
+        break;
+}
+
 export const vuetify = createVuetify({
     components,
     directives,
     theme: {
-        defaultTheme: "light",
+        defaultTheme: theme,
         themes: {
             light: {
                 colors: {

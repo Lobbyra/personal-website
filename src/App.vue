@@ -14,6 +14,7 @@ import layouts from "@/layouts/layouts";
 import router from "@/router/index";
 import { provide, shallowRef } from 'vue';
 import { useTheme } from 'vuetify';
+import { sTheme } from "./main";
 
 const layout = shallowRef("div");
 
@@ -25,9 +26,11 @@ router.afterEach(
 
 
 const theme = useTheme()
+theme.global.name.value = sTheme.theme;
 
 function toggleTheme (newTheme: string) {
   theme.global.name.value = newTheme;
+  sTheme.changeTheme(newTheme);
 }
 
 provide("app:layout", layout);
