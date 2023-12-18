@@ -1,7 +1,5 @@
 <template>
-<div
-id="postsPageMain"
-@scroll="scrollUpdateData($event)">
+<div id="postsPageMain">
     <SearchBar
     :value="search"
     @change="updateSearch($event)"
@@ -54,6 +52,7 @@ export default {
     },
     async mounted() {
         this._fetchPosts();
+        window.addEventListener('scroll', this.scrollUpdateData);
     },
     methods: {
         updateSearch(searchStr: any) {
