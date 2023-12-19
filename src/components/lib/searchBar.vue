@@ -119,7 +119,7 @@ export default {
 
 #searchInput {
     outline: none;
-    color: rgb(var(--v-theme-onCoucou));
+    color: rgb(var(--v-theme-onBackground));
     width: 100%;
 }
 </style>

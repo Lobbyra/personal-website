@@ -4,6 +4,7 @@
     :key="index"
     :value="elem"
     v-for="(elem, index) in value"
+    :olIndex="getOListIndex(index)"
     :is="rtTypeCompName.get(elem.type)"/>
 </div>
 </template>
@@ -53,6 +54,16 @@ export default {
             ]) as Map<string, string>,
         }
     },
+    methods: {
+        getOListIndex(index: number): number {
+            let olIndex: number = 0;
+            while (index >= 0 && this.value[index].type == "o-list-item") {
+                olIndex++;
+                index--;
+            }
+            return (olIndex);
+        }
+    },
     mounted() {
     },
 };
@@ -61,7 +72,11 @@ export default {
 <style scoped>
 
 #mainRich {
+    gap: 6px;
+    min-width: 0;
+    display: flex;
     max-width: 900px;
+    flex-direction: column;
 }
 
 </style>

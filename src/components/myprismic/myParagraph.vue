@@ -1,6 +1,8 @@
 <template>
 <div>
-    {{ value.text }}
+    <p>
+        {{ value.text }}
+    </p>
 </div>
 </template>
 
@@ -26,5 +28,9 @@ export default {
 </script>
 
 <style scoped>
+
+p {
+    font-size: 18px;
+}
 
 </style>

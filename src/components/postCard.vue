@@ -82,9 +82,9 @@
             </span>
         </div>
         <v-btn
-        color="black"
         variant="outlined"
-        @click="gotoPost(doc!.uid!)">
+        @click="gotoPost(doc!.uid!)"
+        :color="$vuetify.theme.current.dark == false ? 'black' : 'white'">
             {{ $t("read") }}
         </v-btn>
     </div>

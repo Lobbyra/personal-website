@@ -1,15 +1,18 @@
 <template>
-<div>
-    E : {{ value }}
+<div class="mt-5 d-flex flex-column">
+    <PrismicEmbed
+    id="embedMain"
+    :field="value.oembed"/>
 </div>
 </template>
 
 <script lang='ts'>
-import type { RTEmbedNode, RTNode } from '@prismicio/client/*';
+import type { RTEmbedNode } from '@prismicio/client/*';
+import { PrismicEmbed } from '@prismicio/vue';
 import type { PropType } from '@vue/runtime-core';
 
 export default {
-    name: 'MyEmbed',
+    name: "MyEmbed",
     props: {
         value: {
             type: Object as PropType<RTEmbedNode>,
@@ -17,13 +20,20 @@ export default {
         }
     },
     data() {
-        return {
-        }
+        return {};
     },
     mounted() {
+        console.log(this.value);
     },
+    components: { PrismicEmbed }
 };
 </script>
 
 <style scoped>
+
+#embedMain {
+    max-width: 100%;
+    overflow: scroll;
+}
+
 </style>

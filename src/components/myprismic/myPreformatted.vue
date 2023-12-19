@@ -1,18 +1,20 @@
 <template>
-<div>
-    PF : {{ value }}
+<div id="mainPre">
+    <pre v-highlightjs>
+        <code :class="getLangComp">{{ getContentComp }}</code>
+    </pre>
 </div>
 </template>
 
 <script lang='ts'>
-import type { RTNode } from '@prismicio/client/*';
+import type { RTPreformattedNode } from '@prismicio/client/*';
 import type { PropType } from '@vue/runtime-core';
 
 export default {
     name: 'MyPreformatted',
     props: {
         value: {
-            type: Object as PropType<RTNode>,
+            type: Object as PropType<RTPreformattedNode>,
             required: true,
         }
     },
@@ -22,10 +24,37 @@ export default {
     },
     mounted() {
     },
+    computed: {
+        getContentComp(): string {
+            return (
+                this.value.text.slice(
+                    this.value.text.indexOf("\n") + 1
+                )
+            );
+        },
+        getLangComp(): string {
+            return (
+                this.value.text.slice(
+                    0,
+                    this.value.text.indexOf("\n")
+                )
+            );
+        },
+    }
 };
 </script>
 
 <style scoped>
 
+#mainPre {
+    min-width: none;
+}
+
+.hljs {
+    padding: 24px;
+    border-radius: 7px;
+    border: 2px solid rgba(var(--v-theme-onBackground), 0.1);
+    background: rgba(var(--v-theme-onBackground), 0.05);
+}
+
 </style>
-    

@@ -1,18 +1,18 @@
 <template>
-<div>
-    I : {{ value }}
+<div class="d-flex">
+    <PrismicImage :field="value"/>
 </div>
 </template>
 
 <script lang='ts'>
-import type { RTNode } from '@prismicio/client/*';
+import type { RTImageNode } from '@prismicio/client/*';
 import type { PropType } from '@vue/runtime-core';
 
 export default {
     name: 'MyImage',
     props: {
         value: {
-            type: Object as PropType<RTNode>,
+            type: Object as PropType<RTImageNode>,
             required: true,
         }
     },
@@ -26,5 +26,9 @@ export default {
 </script>
 
 <style scoped>
+
+img {
+    max-width: 100%;
+}
 
 </style>

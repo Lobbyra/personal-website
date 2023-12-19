@@ -1,7 +1,9 @@
 <template>
 <div id="mainHeading">
-    <component is="valu">
-        {{ value }}
+    <component
+    :is="getComp"
+    id="mainComponent">
+        {{ value.text }}
     </component>
 </div>
 </template>
@@ -31,6 +33,13 @@ export default {
     },
     mounted() {
     },
+    computed: {
+        getComp(): string {
+            return (
+                this.value.type[0] + this.value.type[this.value.type.length - 1]
+            )
+        }
+    }
 };
 </script>
 
@@ -40,4 +49,27 @@ export default {
     font-family: "DM sans";
 }
 
+h1 {
+    font-size: 42px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h5 {
+    font-size: 16px;
+}
+
+h6 {
+    font-size: 12px;
+}
 </style>

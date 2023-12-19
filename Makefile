@@ -5,7 +5,7 @@ test :
 	bun test
 
 dev : installDep
-	bun dev
+	bun dev --host
 
 build : installDep test
 	bun run type-check

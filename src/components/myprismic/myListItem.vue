@@ -1,18 +1,22 @@
 <template>
 <div>
-    L : {{ value }}
+    <ul>
+        <li>
+            {{ value.text }}
+        </li>
+    </ul>
 </div>
 </template>
 
 <script lang='ts'>
-import type { RTNode } from '@prismicio/client/*';
+import type { RTListItemNode } from '@prismicio/client/*';
 import type { PropType } from '@vue/runtime-core';
 
 export default {
     name: 'MyListItem',
     props: {
         value: {
-            type: Object as PropType<RTNode>,
+            type: Object as PropType<RTListItemNode>,
             required: true,
         }
     },
@@ -21,6 +25,8 @@ export default {
         }
     },
     mounted() {
+        console.log(this.value);
+        
     },
 };
 </script>

@@ -3,18 +3,24 @@
     <div
     v-if="doc"
     id="content">
-        <iframe src="https://giphy.com/embed/ThrM4jEi2lBxd7X2yz" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/thisgifishaunted-halloween-working-happy-ThrM4jEi2lBxd7X2yz">via GIPHY</a></p>
-        {{ doc.uid }}
-        <v-btn @click="$router.push('/posts')">
-            RETOUR A LA LISTE
+        <v-btn
+        icon
+        class="align-self-start"
+        @click="$router.push('/posts')">
+            <v-icon>
+                mdi-arrow-left
+            </v-icon>
         </v-btn>
-        <!-- <PrismicEmbed :field="doc.data.richtext[13]"/> -->
+        <MyHeading
+        id="postTitle"
+        :value="doc.data.title[0]"/>
         <MyRichtext :value="doc.data.richtext"/>
     </div>
 </div>
 </template>
 
 <script lang='ts'>
+import MyHeading from "@/components/myprismic/myHeading.vue";
 import MyRichtext from "@/components/myprismic/myRichtext.vue";
 import type { PrismicDocument } from '@prismicio/client/*';
 import { PrismicEmbed } from '@prismicio/vue';
@@ -24,6 +30,7 @@ export default {
     components: {
         PrismicEmbed,
         MyRichtext,
+        MyHeading,
     },
     data() {
         return {
@@ -49,14 +56,16 @@ export default {
 
 #mainPostPage {
     display: flex;
+    padding: 24px;
     justify-content: center;
 }
 
 #content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: 24px;
+    min-width: 0;
+    align-items: center;
+    flex-direction: column;
 }
 
 </style>
