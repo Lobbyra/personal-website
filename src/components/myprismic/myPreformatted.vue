@@ -1,6 +1,6 @@
 <template>
 <div id="mainPre">
-    <pre v-highlightjs>
+    <pre>
         <code :class="getLangComp">{{ getContentComp }}</code>
     </pre>
 </div>
@@ -9,6 +9,7 @@
 <script lang='ts'>
 import type { RTPreformattedNode } from '@prismicio/client/*';
 import type { PropType } from '@vue/runtime-core';
+import hljs from 'highlight.js';
 
 export default {
     name: 'MyPreformatted',
@@ -22,7 +23,10 @@ export default {
         return {
         }
     },
+    beforeCreate() {
+    },
     mounted() {
+        hljs.highlightAll();
     },
     computed: {
         getContentComp(): string {
@@ -34,6 +38,7 @@ export default {
         },
         getLangComp(): string {
             return (
+                "language-" +
                 this.value.text.slice(
                     0,
                     this.value.text.indexOf("\n")
